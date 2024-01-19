@@ -11,8 +11,12 @@
     <groupId>ru.aston</groupId>
     <artifactId>eshop</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <name>eshop</name>
     <description>eshop</description>
+    <modules>
+        <module>users-service</module>
+    </modules>
     <properties>
         <java.version>17</java.version>
     </properties>
