@@ -15,6 +15,7 @@
     <name>eshop</name>
     <description>eshop</description>
     <modules>
+        <module>goods-micro</module>
         <module>order-service</module>
         <module>users-service</module>
     </modules>
