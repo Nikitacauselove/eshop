@@ -17,6 +17,7 @@
     <modules>
         <module>api-gateway</module>
         <module>eureka</module>
+        <module>vacancy-service</module>
         <module>order-service</module>
         <module>product-service</module>
         <module>recommendation-service</module>
