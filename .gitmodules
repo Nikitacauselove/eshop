@@ -1,0 +1,3 @@
+[submodule "DeliveryService"]
+	path = DeliveryService
+	url = https://github.com/kokmagic/eshop
