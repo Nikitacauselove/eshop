@@ -33,5 +33,4 @@ public class Delivery {
         this.orderId = orderId;
         this.date = date;
     }
-    //комментарии для теста
 }
