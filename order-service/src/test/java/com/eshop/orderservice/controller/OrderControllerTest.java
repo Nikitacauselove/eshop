@@ -43,7 +43,7 @@ class OrderControllerTest {
     void create() throws Exception {
         when(orderService.create(any(OrderDto.class))).thenReturn(orderDto);
 
-        mockMvc.perform(post("/api/v1/orders")
+        mockMvc.perform(post("/auth/orders")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(orderJson))
                 .andExpect(status().isCreated());
@@ -53,7 +53,7 @@ class OrderControllerTest {
     void findById() throws Exception {
         when(orderService.findById(anyLong())).thenReturn(orderDto);
 
-        mockMvc.perform(get("/api/v1/orders/1")
+        mockMvc.perform(get("/auth/orders/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -63,7 +63,7 @@ class OrderControllerTest {
         List<OrderDto> orders = List.of(orderDto);
         when(orderService.findAll()).thenReturn(orders);
 
-        mockMvc.perform(get("/api/v1/orders")
+        mockMvc.perform(get("/auth/orders")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -72,7 +72,7 @@ class OrderControllerTest {
     void update() throws Exception {
         when(orderService.update(anyLong(), any(OrderDto.class))).thenReturn(orderDto);
 
-        mockMvc.perform(put("/api/v1/orders/1")
+        mockMvc.perform(put("/auth/orders/1")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(orderJson))
                 .andExpect(status().isOk());
@@ -82,7 +82,7 @@ class OrderControllerTest {
     void delete() throws Exception {
         when(orderService.delete(anyLong())).thenReturn(true);
 
-        mockMvc.perform(MockMvcRequestBuilders.delete("/api/v1/orders/1")
+        mockMvc.perform(MockMvcRequestBuilders.delete("/auth/orders/1")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
