@@ -47,7 +47,7 @@ public class RecommendationControllerTest {
             List<RecommendationDto> recommendations = Collections.singletonList(recommendationDto);
             when(recommendationService.findAll()).thenReturn(recommendations);
 
-            mockMvc.perform(get("/recommendations")
+            mockMvc.perform(get("/auth/recommendations")
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk());
         }
@@ -56,7 +56,7 @@ public class RecommendationControllerTest {
         public void getRecommendationByGoodIdTest() throws Exception {
             when(recommendationService.findRecommendationByGoodId(anyLong())).thenReturn(recommendationDto);
 
-            mockMvc.perform(get("/recommendations/3")
+            mockMvc.perform(get("/auth/recommendations/3")
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk());
         }
@@ -65,7 +65,7 @@ public class RecommendationControllerTest {
         public void createRecommendationTest() throws Exception {
             when(recommendationService.save(any(RecommendationDto.class))).thenReturn(recommendationDto);
 
-            mockMvc.perform(post("/recommendations")
+            mockMvc.perform(post("/auth/recommendations")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\"id\":3,\"goodId\":3,\"viewCount\":10}"))
                     .andExpect(status().isOk());
@@ -75,7 +75,7 @@ public class RecommendationControllerTest {
         public void updateGoodTest() throws Exception {
             when(recommendationService.update(any(RecommendationDto.class))).thenReturn(recommendationDto);
 
-            mockMvc.perform(put("/recommendations")
+            mockMvc.perform(put("/auth/recommendations")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content("{\"id\":3,\"goodId\":3,\"viewCount\":10}"))
                     .andExpect(status().isOk());
@@ -85,7 +85,7 @@ public class RecommendationControllerTest {
         public void deleteGoodTest() throws Exception {
             when(recommendationService.delete(anyLong())).thenReturn(true);
 
-            mockMvc.perform(delete("/recommendations/3")
+            mockMvc.perform(delete("/auth/recommendations/3")
                             .contentType(MediaType.APPLICATION_JSON))
                     .andExpect(status().isOk());
         }

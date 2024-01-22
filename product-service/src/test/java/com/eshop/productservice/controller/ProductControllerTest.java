@@ -46,7 +46,7 @@ public class ProductControllerTest {
         List<ProductDto> goods = Collections.singletonList(productDto);
         when(goodService.findAll()).thenReturn(goods);
 
-        mockMvc.perform(get("/products")
+        mockMvc.perform(get("/auth/products")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -55,7 +55,7 @@ public class ProductControllerTest {
     public void getGoodByIdTest() throws Exception {
         when(goodService.findById(anyLong())).thenReturn(productDto);
 
-        mockMvc.perform(get("/products/1")
+        mockMvc.perform(get("/auth/products/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }
@@ -64,7 +64,7 @@ public class ProductControllerTest {
     public void createGoodTest() throws Exception {
         when(goodService.create(any(ProductDto.class))).thenReturn(productDto);
 
-        mockMvc.perform(post("/products")
+        mockMvc.perform(post("/auth/products")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"id\":1,\"name\":\"Test Good\",\"type\":\"LAPTOP\",\"quantity\":10}"))
                 .andExpect(status().isOk());
@@ -74,7 +74,7 @@ public class ProductControllerTest {
     public void updateGoodTest() throws Exception {
         when(goodService.update(anyLong(), any(ProductDto.class))).thenReturn(productDto);
 
-        mockMvc.perform(put("/products/1")
+        mockMvc.perform(put("/auth/products/1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content("{\"id\":1,\"name\":\"Test Good\",\"type\":\"LAPTOP\",\"quantity\":10}"))
                 .andExpect(status().isOk());
@@ -84,7 +84,7 @@ public class ProductControllerTest {
     public void deleteGoodTest() throws Exception {
         when(goodService.delete(anyLong())).thenReturn(true);
 
-        mockMvc.perform(delete("/products/1")
+        mockMvc.perform(delete("/auth/products/1")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
     }

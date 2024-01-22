@@ -32,7 +32,7 @@ class VacancyControllerTest {
 
         when(vacancyService.getAllVacancies()).thenReturn(Collections.singletonList(VacancyDto));
 
-        mockMvc.perform(get("/api/vacancies")
+        mockMvc.perform(get("/auth/vacancies")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
@@ -48,7 +48,7 @@ class VacancyControllerTest {
 
         when(vacancyService.createVacancy(any(VacancyDto.class))).thenReturn(VacancyDto);
 
-        mockMvc.perform(post("/api/vacancies")
+        mockMvc.perform(post("/auth/vacancies")
                         .content("{}")
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
