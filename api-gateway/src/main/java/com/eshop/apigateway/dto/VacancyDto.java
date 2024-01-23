@@ -4,4 +4,5 @@ public class VacancyDto {
     private Long id;
     private String title;
     private String description;
+    private String location;
 }
