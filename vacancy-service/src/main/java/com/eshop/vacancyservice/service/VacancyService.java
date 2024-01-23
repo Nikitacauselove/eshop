@@ -43,7 +43,9 @@ public class VacancyService {
 
         if (optionalVacancy.isPresent()) {
             Vacancy existingVacancy = optionalVacancy.get();
-            existingVacancy.setTitle(VacancyDto.getTitle()); // Обновите другие поля по необходимости
+            existingVacancy.setTitle(VacancyDto.getTitle());// Обновите другие поля по необходимости
+            existingVacancy.setDescription(VacancyDto.getDescription());
+            existingVacancy.setLocation(VacancyDto.getLocation());
             Vacancy updatedVacancy = vacancyRepository.save(existingVacancy);
             return vacancyMapper.vacancyToVacancyDto(updatedVacancy);
         }
