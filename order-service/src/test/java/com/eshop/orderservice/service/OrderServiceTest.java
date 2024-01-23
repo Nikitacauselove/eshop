@@ -1,19 +1,20 @@
 package com.eshop.orderservice.service;
 
+import com.eshop.orderservice.dto.OrderDto;
+import com.eshop.orderservice.entity.Order;
+import com.eshop.orderservice.mapper.OrderMapper;
+import com.eshop.orderservice.repository.OrderRepository;
 import com.eshop.orderservice.service.impl.OrderServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.boot.test.context.SpringBootTest;
-import com.eshop.orderservice.dto.OrderDto;
-import com.eshop.orderservice.mapper.OrderMapper;
-import com.eshop.orderservice.entity.Order;
-import com.eshop.orderservice.repository.OrderRepository;
 
 import java.util.List;
 import java.util.Optional;
 
+import static com.eshop.orderservice.util.TestObjectsBuilder.dto;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -21,7 +22,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
-import static com.eshop.orderservice.util.TestObjectsBuilder.dto;
 
 @SpringBootTest
 class OrderServiceTest {
@@ -80,6 +80,7 @@ class OrderServiceTest {
 
     @Test
     void update() {
+        when(repository.existsById(any(Long.class))).thenReturn(true);
         when(mapper.fromOrderDto(any(OrderDto.class))).thenReturn(new Order());
         when(repository.save(any(Order.class))).thenReturn((new Order()));
         when(mapper.toOrderDto(any(Order.class))).thenReturn(orderDto);
