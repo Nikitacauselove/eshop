@@ -3,16 +3,8 @@ package com.eshop.apigateway.controller;
 import com.eshop.apigateway.dto.DeliveryDto;
 import com.eshop.apigateway.openfeign.DeliveryClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,28 +15,28 @@ public class DeliveryController {
     @Autowired
     private DeliveryClient deliveryClient;
 
-    @PostMapping("/create")
-    public HttpStatus createDelivery (@RequestBody DeliveryDto deliveryDto) {
+    @PostMapping
+    public ResponseEntity<DeliveryDto> createDelivery (@RequestBody DeliveryDto deliveryDto) {
         return deliveryClient.createDelivery(deliveryDto);
     }
 
-    @GetMapping("/findbyid")
-    public ResponseEntity<DeliveryDto> findDeliveryById (@RequestParam Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<DeliveryDto> findDeliveryById (@PathVariable Long id) {
         return deliveryClient.findDeliveryById(id);
     }
 
-    @GetMapping("/findall")
+    @GetMapping
     public ResponseEntity<List<DeliveryDto>> findAllDeliveries() {
         return deliveryClient.findAllDeliveries();
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<DeliveryDto> updateDelivery (@RequestParam Long id, @RequestBody DeliveryDto updatedDelivery) {
+    @PutMapping("/{id}")
+    public ResponseEntity<DeliveryDto> updateDelivery (@PathVariable Long id, @RequestBody DeliveryDto updatedDelivery) {
         return deliveryClient.updateDelivery(id, updatedDelivery);
     }
 
-    @DeleteMapping("/delete")
-    public HttpStatus deleteDelivery (@RequestParam Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteDelivery (@PathVariable Long id) {
         return deliveryClient.deleteDelivery(id);
     }
 }
