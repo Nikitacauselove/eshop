@@ -2,6 +2,7 @@ package com.eshop.security;
 
 import com.eshop.entity.Role;
 import lombok.Builder;
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,6 +12,7 @@ import java.util.Collections;
 
 
 @Builder
+@Getter
 public class JwtUserDetails implements UserDetails {
 	private final Long id;
 	private final String username;
