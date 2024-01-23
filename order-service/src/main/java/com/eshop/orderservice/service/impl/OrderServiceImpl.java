@@ -1,12 +1,12 @@
 package com.eshop.orderservice.service.impl;
 
 import com.eshop.orderservice.dto.OrderDto;
+import com.eshop.orderservice.entity.Order;
+import com.eshop.orderservice.mapper.OrderMapper;
 import com.eshop.orderservice.repository.OrderRepository;
 import com.eshop.orderservice.service.OrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import com.eshop.orderservice.mapper.OrderMapper;
-import com.eshop.orderservice.entity.Order;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -31,9 +31,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto update(Long id, OrderDto orderDto) {
-        orderDto.setId(id);
-        Order saved = orderRepository.save(orderMapper.fromOrderDto(orderDto));
-        return orderMapper.toOrderDto(saved);
+        if (orderRepository.existsById(id)) {
+            orderDto.setId(id);
+            Order saved = orderRepository.save(orderMapper.fromOrderDto(orderDto));
+            return orderMapper.toOrderDto(saved);
+        }
+        throw new RuntimeException("Not found order for update");
     }
 
     @Override
