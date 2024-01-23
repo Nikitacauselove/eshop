@@ -125,6 +125,28 @@ public class JwtServiceImpl implements JwtService {
 	@Override
 	public boolean isTokenValid(String token, UserDetails userDetails) {
 		final String userName = extractUserName(token);
-		return userName.equals(userDetails.getUsername());
+		return userName.equals(userDetails.getUsername()) && !isTokenExpired(token);
 	}
+
+	/**
+	 * Проверяет, истекло ли время действия токена.
+     *
+	 * @param token Токен для проверки.
+	 * @return true, если время действия токена истекло, в противном случае - false.
+	 */
+	private boolean isTokenExpired(String token) {
+		Date expirationDate = extractExpirationDate(token);
+		return expirationDate != null && expirationDate.before(new Date());
+	}
+
+	/**
+	 * Извлекает дату истечения срока действия токена из его утверждений.
+	 *
+	 * @param token Токен для извлечения даты истечения срока действия.
+	 * @return Дата истечения срока действия токена.
+	 */
+	private Date extractExpirationDate(String token) {
+		return extractClaims(token, Claims::getExpiration);
+	}
+
 }
